@@ -45,7 +45,7 @@ public enum SensitiveType {
     ),
     BANK_CARD(
             "银行卡",
-            DefaultSensitiveSerializer.class,
+            NopSensitiveSerializer.class,
             Collections.emptyList()
     ),
     DEFAULT_TYPE(

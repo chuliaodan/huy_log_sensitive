@@ -10,7 +10,7 @@
                 a.3: 电子邮件--com.huy.sensitive.serializer.EmailSensitiveSerializer。脱敏规则：邮箱长度(不含邮箱后缀，i.e. @qq.com) 大于等于6，把倒数4位脱敏。i.e. 106224****@qq.com
                 a.4: 中文名字--com.huy.sensitive.serializer.ChineseNameSensitiveSerializer。脱敏规则：第一个字符脱敏。i.e *勇
                 a.5: 地址------com.huy.sensitive.serializer.AddressSensitiveSerializer。脱敏规则：把所有数字脱敏。i.e  贵州省遵义市湄潭县***号
-                a.6: 银行卡----com.huy.sensitive.serializer.DefaultSensitiveSerializer。脱敏规则：使用默认脱敏
+                a.6: 银行卡----com.huy.sensitive.serializer.NopSensitiveSerializer。脱敏规则：不脱敏
                 a.7: 默认------com.huy.sensitive.serializer.DefaultSensitiveSerializer。脱敏规则：全部脱敏
                 
                 需个性化脱敏，请继承：com.huy.sensitive.serializer.AbstractSensitiveSerializer 进行扩展
