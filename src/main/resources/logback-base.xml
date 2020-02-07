@@ -1,0 +1,39 @@
+<included>
+	<!-- 脱敏转换器 -->
+	<conversionRule conversionWord="sensitivemsg"
+					converterClass="com.huy.sensitive.logext.converter.LogSensitiveConverter"/>
+
+	<!-- 进程号转换器 -->
+	<conversionRule conversionWord="pid" converterClass="com.huy.sensitive.logext.converter.PidConverter"/>
+
+	<!-- 自定义ip属性 -->
+	<define name="ip" class="com.huy.sensitive.logext.definer.IpDefiner"/>
+
+	<!-- 日志名字 -->
+	<property name="LOG_FILE" value="${LOG_HOME}/${PROJECT_NAME}/${PROJECT_NAME}-${ip}.log"/>
+
+	<!-- 日志模板 -->
+	<property name="LOG_PATTERN"
+			  value="%d{yyyy-MM-dd HH:mm:ss.SSS} | %-5level | %pid | %thread | %X{tid:-N/A} | %class{40}#%method - %sensitivemsg %n"/>
+
+	<!-- 控制台输出 -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 文件输出 -->
+	<appender name="file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${LOG_FILE}</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+			<fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+			<maxFileSize>100MB</maxFileSize>
+			<maxHistory>120</maxHistory>
+			<totalSizeCap>10GB</totalSizeCap>
+		</rollingPolicy>
+		<encoder>
+			<pattern>${LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+</included>

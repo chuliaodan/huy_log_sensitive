@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+
+	<contextName>huy-log-test</contextName>
+
+	<!-- 项目名字(也是日志文件名)，使用只需修改该名字即可 -->
+	<property name="PROJECT_NAME" value="huy-log-test"/>
+
+	<!-- 日志路径 -->
+	<property name="LOG_HOME" value="d:/data/log/"/>
+
+	<include resource="./logback-base.xml"/>
+
+	<root level="debug">
+		<appender-ref ref="console"/>
+		<appender-ref ref="file"/>
+	</root>
+
+</configuration>
