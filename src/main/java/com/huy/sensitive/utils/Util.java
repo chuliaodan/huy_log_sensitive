@@ -208,4 +208,15 @@ public class Util {
         return !isEmpty(collection);
     }
 
+    /**
+     * 脱敏的总开关：有两个地方使用：a.非封装类型脱敏时判断   b.封装类型json化脱敏时判断
+     * <p>
+     * 从系统变量中获取是否脱敏，默认脱敏
+     *
+     * @return true-脱敏
+     */
+    public static boolean isMainSensitive() {
+        return Boolean.parseBoolean(System.getProperty(Constant.SYSTEM_ENV_SENSITIVE_KEYWORD, "true"));
+    }
+
 }

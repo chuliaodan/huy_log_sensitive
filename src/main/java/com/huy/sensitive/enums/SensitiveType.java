@@ -48,6 +48,11 @@ public enum SensitiveType {
             NopSensitiveSerializer.class,
             Collections.emptyList()
     ),
+    NOP(
+            "空操作",
+            NopSensitiveSerializer.class,
+            Collections.emptyList()
+    ),
     DEFAULT_TYPE(
             "默认脱敏类型（数据全部脱敏）",
             DefaultSensitiveSerializer.class,

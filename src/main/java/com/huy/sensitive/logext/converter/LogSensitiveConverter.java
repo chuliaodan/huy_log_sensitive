@@ -77,21 +77,10 @@ public class LogSensitiveConverter extends DynamicConverter<ILoggingEvent> {
     public String convert(ILoggingEvent event) {
         Object[] params = event.getArgumentArray();
         Optional<Object[]> optional = Optional.ofNullable(params);
-        if (optional.isPresent() && isSensitive()) {
+        if (optional.isPresent()) {
             params = Arrays.stream(optional.get()).map(this::sensitive).toArray();
         }
         return MessageFormatter.arrayFormat(event.getMessage(), params).getMessage();
-    }
-
-    /**
-     * 脱敏的总开关
-     * <p>
-     * 从系统变量中获取是否脱敏，默认脱敏
-     *
-     * @return true-脱敏
-     */
-    private boolean isSensitive() {
-        return Boolean.parseBoolean(System.getProperty(Constant.SYSTEM_ENV_SENSITIVE_KEYWORD, "true"));
     }
 
     /**
@@ -111,7 +100,9 @@ public class LogSensitiveConverter extends DynamicConverter<ILoggingEvent> {
             return JSON.toJSONString(param);
         }
 
-        return matchAndReplace(param.toString());
+        return Util.isMainSensitive()  //脱敏总开关
+                ? matchAndReplace(param.toString())
+                : param.toString();
     }
 
     /**

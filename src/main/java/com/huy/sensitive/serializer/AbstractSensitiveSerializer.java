@@ -43,7 +43,12 @@ public abstract class AbstractSensitiveSerializer implements ObjectSerializer {
 
     @Override
     public void write(JSONSerializer serializer, Object object, Object fieldName, Type fieldType, int features) throws IOException {
-        serializer.write(innerUnsensitive(object));
+        //判断总开关是否已设置脱敏
+        if (Util.isMainSensitive()) {
+            serializer.write(innerUnsensitive(object));
+        } else {
+            serializer.write(object);
+        }
     }
 
     /**
